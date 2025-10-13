@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("rag")
@@ -18,7 +19,8 @@ public class ModelsController {
 
     private final ChatClient client;
 
-    public ModelsController(ChatClient.Builder builder, VectorStore vectorStore) {
+
+    public ModelsController(ChatClient.Builder builder, VectorStore vectorStore, RestTemplate restTemplate) {
         this.client = builder
                 .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore))
                 .build();
